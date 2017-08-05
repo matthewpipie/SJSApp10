@@ -28,9 +28,10 @@ namespace SJSApp10.Droid
 			
 			button.Click += delegate {
                 //button.Text = string.Format ("{0} clicks!", count++);
-                string pass = FindViewById<EditText>(Resource.Id.password).Text;
+                string username = FindViewById<EditText>(Resource.Id.username).Text;
+                string password = FindViewById<EditText>(Resource.Id.password).Text;
                 //new SJSManager().Run(pass, FindViewById<TextView>(Resource.Id.response));
-                new SJSManager().Run2(pass, (string resp) => { FindViewById<TextView>(Resource.Id.response).Text = resp; });
+                new SJSManager().Run2(username, password, (string resp) => { FindViewById<TextView>(Resource.Id.response).Text = resp; });
                 
 			};
 		}

@@ -34,36 +34,36 @@ namespace SJSApp10
         private async void getVerificationToken(Action<string> action)
         {
 
-            string urlAddress = "http://www.sjs.org";
+            string urlAddress = "https://sjs.myschoolapp.com/app";
             string token = "token placeholder thingo";
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            WebRequest request = WebRequest.Create(urlAddress);
+            WebResponse response = request.GetResponse();
 
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
+            //if (response.StatusCode == HttpStatusCode.OK)
+            //{
                 Stream receiveStream = response.GetResponseStream();
                 StreamReader readStream = null;
 
-                if (response.CharacterSet == null)
-                {
+                //if (response. == null)
+                //{
                     readStream = new StreamReader(receiveStream);
-                }
-                else
-                {
-                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-                }
+                //}
+                //else
+                //{
+                    //readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                //}
 
                 string data = readStream.ReadToEnd();
 
-                string[] datas = str.Split('"');
-                int index = datas.FindIndex(a => a == "__RequestVerificationToken");
+                string[] datas = data.Split('"');
+                int index = Array.IndexOf(datas, "__RequestVerificationToken");
 
                 token = datas[index + 4];
 
                 response.Close();
                 readStream.Close();
-            }
+            //}
             action(token);
 
         }
@@ -75,7 +75,7 @@ namespace SJSApp10
             {
                 byte[] data = Encoding.ASCII.GetBytes($"Username={username}&Password={password}");
 
-                WebRequest request = WebRequest.Create("");
+                WebRequest request = WebRequest.Create("https://sjs.myschoolapp.com/api/SignIn");
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.Headers.Add("requestverificationtoken", resp);
@@ -89,6 +89,7 @@ namespace SJSApp10
 
                 using (WebResponse response = await request.GetResponseAsync())
                 {
+                    var a = response.Headers;
                     using (Stream stream = response.GetResponseStream())
                     {
                         using (StreamReader sr99 = new StreamReader(stream))
