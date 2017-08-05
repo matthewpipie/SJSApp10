@@ -1,16 +1,10 @@
-﻿using Android.Content;
-using System;
+﻿//using System.Collections.Generic;
+using Xamarin.Auth;
 using System.IO;
 using System.Net;
 using System.Text;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
 using System;
-using System.Net;
-using System.Collections.Specialized;
-using SJSApp10.Droid;
+//using System.Collections.Specialized;
 
 namespace SJSApp10
 {
@@ -38,7 +32,7 @@ namespace SJSApp10
             string token = "token placeholder thingo";
 
             WebRequest request = WebRequest.Create(urlAddress);
-            WebResponse response = request.GetResponse();
+            WebResponse response = await request.GetResponseAsync();
 
             //if (response.StatusCode == HttpStatusCode.OK)
             //{
@@ -67,6 +61,29 @@ namespace SJSApp10
             action(token);
 
         }
+        private string getPath()
+        {
+            #if __ANDROID__
+            // Just use whatever directory SpecialFolder.Personal returns
+                string libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); ;
+            #else
+				// we need to put in /Library/ on iOS5.1 to meet Apple's iCloud terms
+				// (they don't want non-user-generated data in Documents)
+				string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
+				string libraryPath = Path.Combine (documentsPath, "..", "Library"); // Library folder
+            #endif
+            var path = Path.Combine(libraryPath, "meems.txt");
+            return path;
+
+        }
+        public string read()
+        {
+            return File.ReadAllText(getPath());
+        }
+        public void write(string str)
+        {
+            File.WriteAllText(getPath(), str);
+        }
         public void Run2(string username, string password, Action<string> action)
         {
 
@@ -89,10 +106,7 @@ namespace SJSApp10
 
                 using (WebResponse response = await request.GetResponseAsync())
                 {
-                    string a = response.Headers["Set-Cookie"];
-                    string parsed1 = a.Split(',');
-                    string parsed2 = parsed[1].Split(';');
-                    string cookie = parsed2[0];
+                    
                     using (Stream stream = response.GetResponseStream())
                     {
                         using (StreamReader sr99 = new StreamReader(stream))
@@ -100,9 +114,16 @@ namespace SJSApp10
                             responseContent = sr99.ReadToEnd();
                         }
                     }
+                    
+                    
+                    string a = response.Headers["Set-Cookie"];
+                    string[] parsed1 = a.Split(',');
+                    string[] parsed2 = parsed1[1].Split(';');
+                    string cookie = parsed2[0];
+                    action(cookie);
                 }
 
-                action(responseContent);
+                //action(responseContent);
 
             });
 
