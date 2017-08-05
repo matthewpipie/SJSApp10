@@ -31,7 +31,7 @@ namespace SJSApp10
                 wb.UploadValuesAsync(new System.Uri("http://httpbin.org/post"), "POST", data);
             }
         }*/
-        private async void getVerificationToken(Action<string> action)
+        private async void GetVerificationToken(Action<string> action)
         {
 
             string urlAddress = "https://sjs.myschoolapp.com/app";
@@ -71,7 +71,7 @@ namespace SJSApp10
         {
 
 
-            getVerificationToken(async (string resp) =>
+            GetVerificationToken(async (string resp) =>
             {
                 byte[] data = Encoding.ASCII.GetBytes($"Username={username}&Password={password}");
 
