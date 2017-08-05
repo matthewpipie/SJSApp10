@@ -6,6 +6,12 @@
     >
 
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:inputType="textNoSuggestions"/>
+
+    <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +29,7 @@
         android:id="@+id/response"
         android:text="response goes here"
         android:fontFamily="monospace"
-        android:padding="8dp"/>
+        android:padding="8dp"
+        android:textAlignment="center"/>
 
 </LinearLayout>
