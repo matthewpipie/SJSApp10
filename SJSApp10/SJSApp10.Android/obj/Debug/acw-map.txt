@@ -1,0 +1,4 @@
+SJSApp10.Droid.MainActivity, SJSApp10.Android;md5ad344d4822c3c0fd5a56f57e10eb7c40.MainActivity
+SJSApp10.Droid.MainActivity, SJSApp10.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md5ad344d4822c3c0fd5a56f57e10eb7c40.MainActivity
+SJSApp10.Droid.MainActivity;md5ad344d4822c3c0fd5a56f57e10eb7c40.MainActivity
+sjsapp10.droid.MainActivity;md5ad344d4822c3c0fd5a56f57e10eb7c40.MainActivity

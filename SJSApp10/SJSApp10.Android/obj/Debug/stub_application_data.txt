@@ -1,0 +1,2 @@
+android.app.Application
+SJSApp10.Android

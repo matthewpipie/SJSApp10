@@ -13,7 +13,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SJSApp10", "SJSApp10\SJSApp
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SJSApp10\SJSApp10\SJSApp10.projitems*{158d60cd-c970-4622-9a42-327d8e3dc146}*SharedItemsImports = 4
+		SJSApp10\SJSApp10\SJSApp10.projitems*{99c82ae9-e964-4ec2-8f00-8f61c565bc48}*SharedItemsImports = 4
 		SJSApp10\SJSApp10\SJSApp10.projitems*{9dfd6928-a667-4c4b-aeb5-713a72429b49}*SharedItemsImports = 13
+		SJSApp10\SJSApp10\SJSApp10.projitems*{d934282d-252f-4b28-82d8-4f8aaff0a67a}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

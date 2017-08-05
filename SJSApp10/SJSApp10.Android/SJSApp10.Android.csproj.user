@@ -3,5 +3,6 @@
   <PropertyGroup>
     <SelectedDevice>Google Pixel</SelectedDevice>
     <DefaultDevice>n6</DefaultDevice>
+    <AndroidDesignerPreferredDevice>Nexus 4</AndroidDesignerPreferredDevice>
   </PropertyGroup>
 </Project>
