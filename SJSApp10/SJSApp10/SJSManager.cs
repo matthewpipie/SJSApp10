@@ -14,17 +14,17 @@ using SJSApp10.Droid;
 
 namespace SJSApp10
 {
-	public class SJSManager
-	{
-		public SJSManager ()
-		{
-		}
-        /*public void Run(string password, TextView tv)
+    public class SJSManager
+    {
+        public SJSManager ()
         {
-            using (var wb = new WebClient()) {
-                var data = new NameValueCollection();
-                data["username"] = "mgiordano";
-                data["password"] = password;
+        }
+        /*public void Run(string password, TextView tv)
+          {
+          using (var wb = new WebClient()) {
+          var data = new NameValueCollection();
+          data["username"] = "mgiordano";
+          data["password"] = password;
 
                 wb.UploadValuesCompleted += (sender, e) => { new MainActivity().Update(tv, e.Result.Clone().ToString()); } ;
 
@@ -33,6 +33,38 @@ namespace SJSApp10
         }*/
         private async void getVerificationToken(Action<string> action)
         {
+
+            string urlAddress = "http://www.sjs.org";
+            string token = "token placeholder thingo";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = null;
+
+                if (response.CharacterSet == null)
+                {
+                    readStream = new StreamReader(receiveStream);
+                }
+                else
+                {
+                    readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                }
+
+                string data = readStream.ReadToEnd();
+
+                string[] datas = str.Split('"');
+                int index = datas.FindIndex(a => a == "__RequestVerificationToken");
+
+                token = datas[index + 4];
+
+                response.Close();
+                readStream.Close();
+            }
+            action(token);
 
         }
         public async void Run2(string username, string password, Action<string> action)
