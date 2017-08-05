@@ -7,14 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJSApp10.Android", "SJSApp1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJSApp10.iOS", "SJSApp10\SJSApp10.iOS\SJSApp10.iOS.csproj", "{158D60CD-C970-4622-9A42-327D8E3DC146}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SJSApp10.UWP", "SJSApp10\SJSApp10.UWP\SJSApp10.UWP.csproj", "{99C82AE9-E964-4EC2-8F00-8F61C565BC48}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SJSApp10", "SJSApp10\SJSApp10\SJSApp10.shproj", "{9DFD6928-A667-4C4B-AEB5-713A72429B49}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SJSApp10\SJSApp10\SJSApp10.projitems*{158d60cd-c970-4622-9a42-327d8e3dc146}*SharedItemsImports = 4
-		SJSApp10\SJSApp10\SJSApp10.projitems*{99c82ae9-e964-4ec2-8f00-8f61c565bc48}*SharedItemsImports = 4
 		SJSApp10\SJSApp10\SJSApp10.projitems*{9dfd6928-a667-4c4b-aeb5-713a72429b49}*SharedItemsImports = 13
 		SJSApp10\SJSApp10\SJSApp10.projitems*{d934282d-252f-4b28-82d8-4f8aaff0a67a}*SharedItemsImports = 4
 	EndGlobalSection
@@ -85,30 +82,6 @@ Global
 		{158D60CD-C970-4622-9A42-327D8E3DC146}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{158D60CD-C970-4622-9A42-327D8E3DC146}.Release|x64.ActiveCfg = Release|iPhone
 		{158D60CD-C970-4622-9A42-327D8E3DC146}.Release|x86.ActiveCfg = Release|iPhone
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|ARM.ActiveCfg = Debug|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|ARM.Build.0 = Debug|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|ARM.Deploy.0 = Debug|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|iPhone.ActiveCfg = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x64.ActiveCfg = Debug|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x64.Build.0 = Debug|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x64.Deploy.0 = Debug|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x86.ActiveCfg = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x86.Build.0 = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Debug|x86.Deploy.0 = Debug|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|Any CPU.ActiveCfg = Release|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|ARM.ActiveCfg = Release|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|ARM.Build.0 = Release|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|ARM.Deploy.0 = Release|ARM
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|iPhone.ActiveCfg = Release|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|iPhoneSimulator.ActiveCfg = Release|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x64.ActiveCfg = Release|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x64.Build.0 = Release|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x64.Deploy.0 = Release|x64
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x86.ActiveCfg = Release|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x86.Build.0 = Release|x86
-		{99C82AE9-E964-4EC2-8F00-8F61C565BC48}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
