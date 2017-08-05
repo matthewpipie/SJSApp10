@@ -90,6 +90,9 @@ namespace SJSApp10
                 using (WebResponse response = await request.GetResponseAsync())
                 {
                     string a = response.Headers["Set-Cookie"];
+                    string parsed1 = a.Split(',');
+                    string parsed2 = parsed[1].Split(';');
+                    string cookie = parsed2[0];
                     using (Stream stream = response.GetResponseStream())
                     {
                         using (StreamReader sr99 = new StreamReader(stream))
