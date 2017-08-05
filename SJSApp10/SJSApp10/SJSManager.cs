@@ -35,36 +35,41 @@ namespace SJSApp10
         {
 
         }
-        public async void Run2(string username, string password, Action<string> action)
+        public void Run2(string username, string password, Action<string> action)
         {
 
 
-
-            byte[] data = Encoding.ASCII.GetBytes($"username={username}&password={password}");
-
-            WebRequest request = WebRequest.Create("");
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = data.Length;
-            using (Stream stream = request.GetRequestStream())
+            getVerificationToken(async (string resp) =>
             {
-                stream.Write(data, 0, data.Length);
-            }
+                byte[] data = Encoding.ASCII.GetBytes($"Username={username}&Password={password}");
 
-            string responseContent = null;
-
-            using (WebResponse response = await request.GetResponseAsync())
-            {
-                using (Stream stream = response.GetResponseStream())
+                WebRequest request = WebRequest.Create("");
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.Headers.Add("requestverificationtoken", resp);
+                request.ContentLength = data.Length;
+                using (Stream stream = request.GetRequestStream())
                 {
-                    using (StreamReader sr99 = new StreamReader(stream))
+                    stream.Write(data, 0, data.Length);
+                }
+
+                string responseContent = null;
+
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    using (Stream stream = response.GetResponseStream())
                     {
-                        responseContent = sr99.ReadToEnd();
+                        using (StreamReader sr99 = new StreamReader(stream))
+                        {
+                            responseContent = sr99.ReadToEnd();
+                        }
                     }
                 }
-            }
 
-            action(responseContent);
+                action(responseContent);
+
+            });
+
         }
     }
 }
