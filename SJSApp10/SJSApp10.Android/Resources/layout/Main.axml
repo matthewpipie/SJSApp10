@@ -18,10 +18,28 @@
         android:inputType="textPassword"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="submit"/>
+        android:text="Submit"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read"
+        android:id="@+id/read"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Write"
+        android:id="@+id/write"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Assignments"
+        android:id="@+id/assign"/>
 
     <TextView
         android:layout_width="match_parent"
