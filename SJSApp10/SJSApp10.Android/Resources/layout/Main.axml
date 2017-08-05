@@ -21,7 +21,16 @@
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"/>
+        android:text="submit"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/response"
+        android:text="response goes here"
+        android:fontFamily="monospace"
+        android:padding="8dp"
+        android:textAlignment="center"/>
 
     <Button
         android:layout_width="match_parent"
@@ -40,11 +49,11 @@
         android:layout_height="wrap_content"
         android:text="Get Assignments"
         android:id="@+id/assign"/>
-
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/response"
+        android:id="@+id/response2"
         android:text="response goes here"
         android:fontFamily="monospace"
         android:padding="8dp"
