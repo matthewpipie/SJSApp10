@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Android.App;
 using Android.Content;
 using Android.Runtime;
@@ -33,18 +34,25 @@ namespace SJSApp10.Droid
                 string username = FindViewById<EditText>(Resource.Id.username).Text;
                 string password = FindViewById<EditText>(Resource.Id.password).Text;
                 //new SJSManager().Run(pass, FindViewById<TextView>(Resource.Id.response));
-                new SJSManager().Run2(username, password, (string resp) => { FindViewById<TextView>(Resource.Id.response).Text = resp; });
+                //new SJSManager().Run2(username, password, (string resp) => { FindViewById<TextView>(Resource.Id.response).Text = resp; });
+                SJSManager.Instance.SetCredentials(username, password, true, () =>
+                {
+                    SJSManager.Instance.GetAssignments((Object o) =>
+                    {
+                        FindViewById<TextView>(Resource.Id.response2).Text = JsonConvert.SerializeObject(o);
+                    });
+                });
                 
                 
 			};
             write.Click += delegate
             {
-                new SJSManager().write(FindViewById<TextView>(Resource.Id.response).Text);
+                //new SJSManager().write(FindViewById<TextView>(Resource.Id.response).Text);
                 FindViewById<TextView>(Resource.Id.response2).Text = "done written it";
             };
             read.Click += delegate
             {
-                FindViewById<TextView>(Resource.Id.response2).Text = new SJSManager().read();
+                //FindViewById<TextView>(Resource.Id.response2).Text = new SJSManager().read();
             };
 
 		}

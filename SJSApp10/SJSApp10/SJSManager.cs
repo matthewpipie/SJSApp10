@@ -32,9 +32,9 @@ namespace SJSApp10
         }
 
         // Methods
-        public void SetCredentials(string username, string password, Action callback)
+        public void SetCredentials(string username, string password, bool clearToken, Action callback)
         {
-            LoginManager.SubmitCredentials(username, password, callback);
+            LoginManager.SubmitCredentials(username, password, clearToken, callback);
         }
         public Object GetAssignments(Action<Object> callback)
         {

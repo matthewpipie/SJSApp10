@@ -41,7 +41,7 @@ namespace SJSApp10
             string data = readStream.ReadToEnd();
 
             string[] datas = data.Split('"');
-            int index = Array.IndexOf(datas, "__RequestVerificationtoken");
+            int index = Array.IndexOf(datas, "__RequestVerificationToken");
 
             token = datas[index + 4];
 
@@ -73,18 +73,31 @@ namespace SJSApp10
             token = File.Exists(path) ? File.ReadAllText(path) : null;
         }
 
-        public async void SubmitCredentials(string username, string password, Action callback)
+        public async void SubmitCredentials(string username, string password, bool clearToken, Action callback)
         {
+            // Delete previous credentials
+            var account = AccountStore.Create().FindAccountsForService(APP_NAME).FirstOrDefault();
+            while (account != null)
+            {
+                await AccountStore.Create().DeleteAsync(account, APP_NAME);
+                account = AccountStore.Create().FindAccountsForService(APP_NAME).FirstOrDefault();
+            }
+
+            // Store new account info
             Account acct = new Account
             {
                 Username = username
             };
             acct.Properties.Add("Password", password);
             await AccountStore.Create().SaveAsync(acct, APP_NAME);
+            if (clearToken)
+            {
+                token = null;
+            }
             callback();
         }
 
-        private string[] GetCredentials()
+        public static string[] GetCredentials()
         {
             var acct = AccountStore.Create().FindAccountsForService(APP_NAME).FirstOrDefault();
             if (acct == null)
@@ -131,7 +144,9 @@ namespace SJSApp10
                     }
 
                     dynamic o = JsonConvert.DeserializeObject(responseContent);
-                    if (!o.LoginSuccessful)
+                    // dont ask me why but u need this for it not to crash
+                    bool pls = o.LoginSuccessful;
+                    if (!pls)
                     {
                         callback(false);
                         return;
@@ -193,23 +208,28 @@ namespace SJSApp10
                 }
 
                 dynamic o = JsonConvert.DeserializeObject(responseContent);
-                if (o.Error != null)
+                try
                 {
-                    //token is invalid
-
-                    GenerateNewToken((bool success) =>
+                    if (o.Error != null)
                     {
-                        if (success)
-                        {
-                            MakeAPICall(call, callback);
-                        }
-                        else
-                        {
-                            callback(null);
-                        }
-                    });
+                        //token is invalid
 
-                    return;
+                        GenerateNewToken((bool success) =>
+                        {
+                            if (success)
+                            {
+                                MakeAPICall(call, callback);
+                            }
+                            else
+                            {
+                                callback(null);
+                            }
+                        });
+                        return;
+                    }
+                }
+                catch (Exception e)
+                {
                 }
                 callback(o);
             }
