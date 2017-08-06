@@ -99,6 +99,16 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "SJSApp10.Android.dll" comes first in this list. */
 		"SJSApp10.Android.dll",
+		"Newtonsoft.Json.dll",
+		"PCLCrypto.dll",
+		"PInvoke.BCrypt.dll",
+		"PInvoke.Kernel32.dll",
+		"PInvoke.NCrypt.dll",
+		"PInvoke.Windows.Core.dll",
+		"Validation.dll",
+		"Xamarin.Android.Support.CustomTabs.dll",
+		"Xamarin.Android.Support.v4.dll",
+		"Xamarin.Auth.dll",
 	};
 	public static final String[] Dependencies = new String[]{
 	};

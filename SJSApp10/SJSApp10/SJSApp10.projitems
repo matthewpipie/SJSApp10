@@ -9,6 +9,8 @@
     <Import_RootNamespace>SJSApp10</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)SJSLoginManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SJSManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UIAction.cs" />
   </ItemGroup>
 </Project>

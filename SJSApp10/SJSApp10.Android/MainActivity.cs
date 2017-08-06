@@ -37,7 +37,6 @@ namespace SJSApp10.Droid
                 
                 
 			};
-
             write.Click += delegate
             {
                 new SJSManager().write(FindViewById<TextView>(Resource.Id.response).Text);
@@ -55,5 +54,3 @@ namespace SJSApp10.Droid
         //}
 	}
 }
-
-

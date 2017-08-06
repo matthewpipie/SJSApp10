@@ -1,7 +1,6 @@
 ﻿//using System.Collections.Generic;
 using Xamarin.Auth;
-using System.IO;
-using System.Net;
+using Newtonsoft.Json;
 using System.Text;
 using System;
 //using System.Collections.Specialized;
@@ -10,9 +9,9 @@ namespace SJSApp10
 {
     public class SJSManager
     {
-        public SJSManager ()
-        {
-        }
+        //public SJSManager ()
+        //{
+        //}
         /*public void Run(string password, TextView tv)
           {
           using (var wb = new WebClient()) {
@@ -25,43 +24,8 @@ namespace SJSApp10
                 wb.UploadValuesAsync(new System.Uri("http://httpbin.org/post"), "POST", data);
             }
         }*/
-        private async void GetVerificationToken(Action<string> action)
-        {
 
-            string urlAddress = "https://sjs.myschoolapp.com/app";
-            string token = "token placeholder thingo";
-
-            WebRequest request = WebRequest.Create(urlAddress);
-            WebResponse response = await request.GetResponseAsync();
-
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-                Stream receiveStream = response.GetResponseStream();
-                StreamReader readStream = null;
-
-                //if (response. == null)
-                //{
-                    readStream = new StreamReader(receiveStream);
-                //}
-                //else
-                //{
-                    //readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-                //}
-
-                string data = readStream.ReadToEnd();
-
-                string[] datas = data.Split('"');
-                int index = Array.IndexOf(datas, "__RequestVerificationToken");
-
-                token = datas[index + 4];
-
-                response.Close();
-                readStream.Close();
-            //}
-            action(token);
-
-        }
-        private string getPath()
+        /*private string getPath()
         {
             #if __ANDROID__
             // Just use whatever directory SpecialFolder.Personal returns
@@ -75,59 +39,44 @@ namespace SJSApp10
             var path = Path.Combine(libraryPath, "meems.txt");
             return path;
 
-        }
-        public string read()
+        }*/
+        /*public string read()
         {
             return File.ReadAllText(getPath());
         }
         public void write(string str)
         {
             File.WriteAllText(getPath(), str);
+        }*/
+        // Private vars
+        private SJSLoginManager LoginManager;
+        private Object AssignmentCache { get; set; }
+
+        // Constructor
+        private SJSManager() {
+            LoginManager = new SJSLoginManager();
         }
-        public void Run2(string username, string password, Action<string> action)
-        {
 
-
-            GetVerificationToken(async (string resp) =>
+        // Singleton setup
+        private static SJSManager instance;
+        public static SJSManager Instance {
+            get
             {
-                byte[] data = Encoding.ASCII.GetBytes($"Username={username}&Password={password}");
-
-                WebRequest request = WebRequest.Create("https://sjs.myschoolapp.com/api/SignIn");
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.Headers.Add("requestverificationtoken", resp);
-                request.ContentLength = data.Length;
-                using (Stream stream = request.GetRequestStream())
+                if (instance == null)
                 {
-                    stream.Write(data, 0, data.Length);
+                    instance = new SJSManager();
                 }
-
-                string responseContent = null;
-
-                using (WebResponse response = await request.GetResponseAsync())
-                {
-                    
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        using (StreamReader sr99 = new StreamReader(stream))
-                        {
-                            responseContent = sr99.ReadToEnd();
-                        }
-                    }
-                    
-                    
-                    string a = response.Headers["Set-Cookie"];
-                    string[] parsed1 = a.Split(',');
-                    string[] parsed2 = parsed1[1].Split(';');
-                    string cookie = parsed2[0];
-                    action(cookie);
-                }
-
-                //action(responseContent);
-
-            });
-
+                return instance;
+            }
         }
+
+        // Methods
+        public Object GetAssignments(Action<Object> action)
+        {
+            LoginManager.MakeAPICall("DataDirect/AssignmentCenterAssignments/?format=json&filter=2&dateStart=8%2F5%2F2017&dateEnd=8%2F5%2F2017&persona=2&statusList=&sectionList=", (Object o) => { AssignmentCache = o; action(o); });
+            return AssignmentCache;
+        }
+        
     }
 }
 
