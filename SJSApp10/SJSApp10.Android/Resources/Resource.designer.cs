@@ -92,35 +92,32 @@ namespace SJSApp10.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060008
-			public const int assign = 2131099656;
-			
-			// aapt resource value: 0x7f060003
-			public const int password = 2131099651;
-			
-			// aapt resource value: 0x7f060006
-			public const int read = 2131099654;
-			
-			// aapt resource value: 0x7f060005
-			public const int response = 2131099653;
-			
-			// aapt resource value: 0x7f060009
-			public const int response2 = 2131099657;
-			
-			// aapt resource value: 0x7f060004
-			public const int submit = 2131099652;
-			
-			// aapt resource value: 0x7f060001
-			public const int textView1 = 2131099649;
+			// aapt resource value: 0x7f060007
+			public const int assign = 2131099655;
 			
 			// aapt resource value: 0x7f060002
-			public const int username = 2131099650;
+			public const int password = 2131099650;
+			
+			// aapt resource value: 0x7f060005
+			public const int read = 2131099653;
+			
+			// aapt resource value: 0x7f060004
+			public const int response = 2131099652;
+			
+			// aapt resource value: 0x7f060008
+			public const int response2 = 2131099656;
+			
+			// aapt resource value: 0x7f060003
+			public const int submit = 2131099651;
+			
+			// aapt resource value: 0x7f060001
+			public const int username = 2131099649;
 			
 			// aapt resource value: 0x7f060000
 			public const int webview = 2131099648;
 			
-			// aapt resource value: 0x7f060007
-			public const int write = 2131099655;
+			// aapt resource value: 0x7f060006
+			public const int write = 2131099654;
 			
 			static Id()
 			{
@@ -139,10 +136,7 @@ namespace SJSApp10.Droid
 			public const int activity_webview = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int layout1 = 2130903041;
-			
-			// aapt resource value: 0x7f030002
-			public const int Main = 2130903042;
+			public const int Main = 2130903041;
 			
 			static Layout()
 			{
