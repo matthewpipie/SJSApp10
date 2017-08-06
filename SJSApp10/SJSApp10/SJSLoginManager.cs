@@ -195,45 +195,70 @@ namespace SJSApp10
             }
 
             string responseContent = null;
+            dynamic o = null;
 
-            using (WebResponse response = await request.GetResponseAsync())
+            bool fail = false;
+            try
             {
-
-                using (Stream stream = response.GetResponseStream())
+                using (WebResponse response = await request.GetResponseAsync())
                 {
-                    using (StreamReader sr99 = new StreamReader(stream))
+                    using (Stream stream = response.GetResponseStream())
                     {
-                        responseContent = sr99.ReadToEnd();
-                    }
-                }
-
-                dynamic o = JsonConvert.DeserializeObject(responseContent);
-                try
-                {
-                    if (o.Error != null)
-                    {
-                        //token is invalid
-
-                        GenerateNewToken((bool success) =>
+                        using (StreamReader sr99 = new StreamReader(stream))
                         {
-                            if (success)
-                            {
-                                MakeAPICall(call, callback);
-                            }
-                            else
-                            {
-                                callback(null);
-                            }
-                        });
-                        return;
+                            responseContent = sr99.ReadToEnd();
+                        }
+                    }
+                    o = JsonConvert.DeserializeObject(responseContent);
+                    try
+                    {
+                        if (o.Error != null)
+                        {
+                            fail = true;
+                        }
+                    }
+                    catch (Exception e)
+                    {
                     }
                 }
-                catch (Exception e)
+            }
+            catch (Exception)
+            {
+                fail = true;
+            }
+            if (fail)
+            {
+                //token is invalid
+                GenerateNewToken((bool success) =>
                 {
-                }
+                    if (success)
+                    {
+                        MakeAPICall(call, callback);
+                    }
+                    else
+                    {
+                        callback(null);
+                    }
+                });
+                return;
+            }
+            else
+            {
                 callback(o);
             }
+        }
 
+
+
+
+        // TEMPORARY METHODS ONLY USED IN TESTING
+        public void InvalidateToken()
+        {
+            token = "1234";
+        }
+        public void DeleteToken()
+        {
+            token = null;
         }
     }
 }

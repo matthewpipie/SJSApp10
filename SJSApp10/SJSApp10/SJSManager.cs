@@ -49,6 +49,19 @@ namespace SJSApp10
             return AssignmentCache;
         }
         
+
+
+
+
+        // TEMPORARY METHODS ONLY USED IN TESTING
+        public void InvalidateToken()
+        {
+            LoginManager.InvalidateToken();
+        }
+        public void DeleteToken()
+        {
+            LoginManager.DeleteToken();
+        }
     }
 }
 
