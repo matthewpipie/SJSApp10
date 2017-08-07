@@ -20,25 +20,30 @@ namespace SJSApp10.Droid
             AlertDialog.Builder builder = new AlertDialog.Builder(this.Activity);
             LayoutInflater inflater = this.Activity.LayoutInflater;
             builder.SetView(inflater.Inflate(Resource.Layout.LoginFragmentLayout, null))
-                .SetPositiveButton("SIGN IN", (senderAlert, args) =>
+                .SetPositiveButton("Sign In", (senderAlert, args) =>
                 {
-                    Toast.MakeText(this.Activity, this.Dialog.FindViewById<EditText>(Resource.Id.username).Text, ToastLength.Short).Show();
+                    //Toast.MakeText(this.Activity, this.Dialog.FindViewById<EditText>(Resource.Id.username).Text, ToastLength.Short).Show();
                     string username = this.Dialog.FindViewById<EditText>(Resource.Id.username).Text;
                     string password = this.Dialog.FindViewById<EditText>(Resource.Id.password).Text;
                     SJSManager.Instance.SetCredentials(username, password, true, () =>
                     {
                         Intent resultIntent = new Intent();
-                        resultIntent.PutExtra("username", username);
-                        resultIntent.PutExtra("password", password);
+                        //resultIntent.PutExtra("username", username);
+                        //resultIntent.PutExtra("password", password);
                         this.Activity.SetResult(Result.Ok, resultIntent);
                     });
 
-                })
-                .SetNegativeButton("CANCEL", (senderAlert, args) =>
-                {
-                    Toast.MakeText(this.Activity, this.Activity.FindViewById<EditText>(Resource.Id.password).Text, ToastLength.Short).Show();
+                //})
+                //.SetNegativeButton("Cancel", (senderAlert, args) =>
+                //{
+                    //Toast.MakeText(this.Activity, this.Activity.FindViewById<EditText>(Resource.Id.password).Text, ToastLength.Short).Show();
                 });
             return builder.Create();
+        }
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            ((MainActivity)Activity).OnFragmentResult();
         }
 
     }

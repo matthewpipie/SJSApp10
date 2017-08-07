@@ -117,7 +117,11 @@ namespace SJSApp10.Droid
             // temp
             FindViewById<TextView>(Resource.Id.response).Text = "loadin";
         }
-        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        public void OnFragmentResult()
+        {
+            GetAndDisplayAssignments();
+        }
+        /*protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
             switch (requestCode)
@@ -131,7 +135,7 @@ namespace SJSApp10.Droid
                 default:
                     break;
             }
-        }
+        }*/
         void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
             switch (e.MenuItem.ItemId)
