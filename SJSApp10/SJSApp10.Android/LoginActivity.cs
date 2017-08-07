@@ -19,7 +19,7 @@ namespace SJSApp10.Droid
         {
             base.OnCreate(savedInstanceState);
 
-			SetContentView (Resource.Layout.LoginLayout);
+			SetContentView (Resource.Layout.Login);
 
             // Create your application here
             FindViewById<Button>(Resource.Id.submit).Click += delegate

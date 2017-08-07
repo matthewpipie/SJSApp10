@@ -1,39 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Assignments"
-        android:id="@+id/assign" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/response"
-        android:text="Loading..."
-        android:fontFamily="monospace"
-        android:padding="8dp"
-        android:textAlignment="center" />
-    <Button
-        android:text="Store Trash"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/storeTrash" />
-    <Button
-        android:text="Store Trash and Delete Token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/storeTrash2" />
-    <Button
-        android:text="Delete Token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/deleteToken" />
-    <Button
-        android:text="Invalidate Token"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inval" />
-</LinearLayout>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+<!-- Your content -->
+<!--   android:layout_width="match_parent"
+        android:layout_height="match_parent">
+     android:orientation="vertical"-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+    <!-- <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" /> -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Assignments"
+            android:id="@+id/assign" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/response"
+            android:text="Loading..."
+            android:fontFamily="monospace"
+            android:padding="8dp"
+            android:textAlignment="center" />
+        <Button
+            android:text="Store Trash"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeTrash" />
+        <Button
+            android:text="Store Trash and Delete Token"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeTrash2" />
+        <Button
+            android:text="Delete Token"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteToken" />
+        <Button
+            android:text="Invalidate Token"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/inval" />
+    </LinearLayout>
+<!-- The flyout menu -->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navmenu"
+        app:headerLayout="@layout/header" />
+</android.support.v4.widget.DrawerLayout>

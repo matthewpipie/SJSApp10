@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Unique key for cached download -->
+        <_XbdKey_gridlayoutv7>androidsupport-25.3.1/gridlayoutv7</_XbdKey_gridlayoutv7>
+        
+        <!-- Path to .aar file within the extracted contents of the cached download -->
+        <_XbdAarFile_gridlayoutv7>m2repository\com\android\support\gridlayout-v7\25.3.1\gridlayout-v7-25.3.1.aar</_XbdAarFile_gridlayoutv7>
+        
+        <!-- Full path to .aar file, assuming we had to download to the cache - we reset this later if it is in the sdk -->
+        <_XbdAarFileFullPath_gridlayoutv7>$(XamarinBuildDownloadDir)$(_XbdKey_gridlayoutv7)\gridlayout-v7-25.3.1.aar</_XbdAarFileFullPath_gridlayoutv7>
+
+        <!-- Assembly name to embed .aar in -->
+        <_XbdAssemblyName_gridlayoutv7>Xamarin.Android.Support.v7.GridLayout</_XbdAssemblyName_gridlayoutv7>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <XamarinBuildRestoreResources Include="_XbdRestoreItems_gridlayoutv7"/>
+    </ItemGroup>
+
+    <Target Name="_XbdRestoreItems_gridlayoutv7">
+        <!-- Check if the aar file is in the android sdk already and change the path to use to it, if it's found -->
+        <CreateProperty Value="$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_gridlayoutv7)" Condition="Exists('$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_gridlayoutv7)')">
+            <Output PropertyName="_XbdAarFileFullPath_gridlayoutv7" TaskParameter="Value" />
+        </CreateProperty>
+
+        <ItemGroup>
+            <XamarinBuildDownloadPartialZip Include="$(_XbdKey_gridlayoutv7)" Condition="!Exists('$(_XbdAarFileFullPath_gridlayoutv7)')">
+                <Url>https://dl-ssl.google.com/android/repository/android_m2repository_r47.zip</Url>
+                <ToFile>gridlayout-v7-25.3.1.aar</ToFile>
+                <RangeStart>211798440</RangeStart>
+                <RangeEnd>211839020</RangeEnd>
+                <Md5>3d5d2a786d01b631e4539e62ceffe626</Md5>
+                <CustomErrorMessage>Please open the Android SDK Manager and install the latest version of 'Android Support Repository' from the 'Extras' section, and then reload your solution.</CustomErrorMessage>
+                <CustomErrorCode>XBD404</CustomErrorCode>
+            </XamarinBuildDownloadPartialZip>
+        </ItemGroup>
+
+        <ItemGroup>
+            <XamarinBuildDownloadRestoreAssemblyAar Include="$(_XbdAarFileFullPath_gridlayoutv7)">
+                <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+                <AssemblyName>$(_XbdAssemblyName_gridlayoutv7)</AssemblyName>
+            </XamarinBuildDownloadRestoreAssemblyAar>
+        </ItemGroup>
+    </Target>
+</Project>

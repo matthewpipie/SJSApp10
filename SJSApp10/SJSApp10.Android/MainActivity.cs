@@ -6,12 +6,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V4.Widget;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
+using Android.Support.Design.Widget;
 
 namespace SJSApp10.Droid
 {
 	[Activity (Label = "SJSApp10.Android", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
-	{
+	public class MainActivity : AppCompatActivity
+    {
         //int count = 1;
         public const int LOGIN_VAL = 2;
 
@@ -23,10 +27,16 @@ namespace SJSApp10.Droid
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
 
-			// Get our button from the layout resource,
-			// and attach an event to it
-			//Button submit = FindViewById<Button> (Resource.Id.submit);
-			Button getAssignments = FindViewById<Button> (Resource.Id.assign);
+            // Set up slide menu
+
+            // Attach item selected handler to navigation view
+            var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
+            navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
+
+            // Get our button from the layout resource,
+            // and attach an event to it
+            //Button submit = FindViewById<Button> (Resource.Id.submit);
+            Button getAssignments = FindViewById<Button> (Resource.Id.assign);
 			//Button read = FindViewById<Button> (Resource.Id.read);
 			//Button write = FindViewById<Button> (Resource.Id.write);
 			
@@ -107,6 +117,20 @@ namespace SJSApp10.Droid
                 default:
                     break;
             }
+        }
+        void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
+        {
+            switch (e.MenuItem.ItemId)
+            {
+                case (Resource.Id.nav_home):
+                    // React on 'Home' selection
+                    // ...
+                    break;
+            }
+
+            // Close drawer
+            
+            FindViewById<DrawerLayout>(Resource.Id.drawer_layout).CloseDrawers();
         }
     }
 }
