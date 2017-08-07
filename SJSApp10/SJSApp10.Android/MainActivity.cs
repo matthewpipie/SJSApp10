@@ -104,8 +104,9 @@ namespace SJSApp10.Droid
             {
                 if (o == null)
                 {
-                    Intent i = new Intent(this, typeof(LoginActivity));    
-                    StartActivityForResult(i, LOGIN_VAL);
+                    LoginFragment loginFragment = new LoginFragment();
+                    loginFragment.Show(FragmentManager, "login");
+
                 }
                 else
                 {
