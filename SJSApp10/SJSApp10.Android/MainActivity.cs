@@ -18,6 +18,7 @@ namespace SJSApp10.Droid
     {
         //int count = 1;
         public const int LOGIN_VAL = 2;
+        DrawerLayout drawerLayout;
 
 		protected override void OnCreate (Bundle bundle)
 		{
@@ -29,9 +30,21 @@ namespace SJSApp10.Droid
 
             // Set up slide menu
 
+            drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
+
+            // Init toolbar
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
+
             // Attach item selected handler to navigation view
             var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
             navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
+
+            // Create ActionBarDrawerToggle button and add it to the toolbar
+            var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
+            drawerLayout.SetDrawerListener(drawerToggle);
+            drawerToggle.SyncState();
+
 
             // Get our button from the layout resource,
             // and attach an event to it
@@ -130,7 +143,7 @@ namespace SJSApp10.Droid
 
             // Close drawer
             
-            FindViewById<DrawerLayout>(Resource.Id.drawer_layout).CloseDrawers();
+            drawerLayout.CloseDrawers();
         }
     }
 }
