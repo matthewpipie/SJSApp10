@@ -100,7 +100,7 @@ namespace SJSApp10.Droid
         //}
         private void GetAndDisplayAssignments()
         {
-            Object cached = SJSManager.Instance.GetAssignments((Object o) =>
+            Object cached = SJSManager.Instance.GetAssignments(DateTime.Today(), DateTime.Today(), (Object o) =>
             {
                 if (o == null)
                 {
