@@ -11,6 +11,7 @@ namespace SJSApp10
     {
         // Private vars
         private SJSLoginManager LoginManager;
+
         private Object AssignmentCache { get; set; }
 
         // Constructor
@@ -35,6 +36,10 @@ namespace SJSApp10
         public void SetCredentials(string username, string password, bool clearToken, Action callback)
         {
             LoginManager.SubmitCredentials(username, password, clearToken, callback);
+        }
+        public Object GetSchedule(DateTime day, Action<Object> callback)
+        {
+
         }
         public Object GetAssignments(DateTime start, DateTime end, Action<Object> callback)
         {
