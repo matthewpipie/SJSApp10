@@ -9,10 +9,16 @@ namespace SJSApp10
 {
     public class SJSManager
     {
+        // Constants
+        public const string SAC_SUGGESTIONS_LINK = "https://docs.google.com/a/sjs.org/forms/d/1bBOdqDCeVLpvA3GkW1WzxvkZhLm8NkHg-IXZP8jUo9I/viewform";
+        public const string NAVIANCE_LINK = "https://connection.naviance.com/family-connection/auth/login/?hsid=sjs";
+
         // Private vars
         private SJSLoginManager LoginManager;
 
         private Object AssignmentCache { get; set; }
+        private Object ScheduleCache { get; set; }
+        private DateTime ScheduleCacheDate { get; set; }
 
         // Constructor
         private SJSManager() {
@@ -39,7 +45,17 @@ namespace SJSApp10
         }
         public Object GetSchedule(DateTime day, Action<Object> callback)
         {
-
+            string date = day.Month.ToString() + "%2F" + day.Day.ToString() + "%2F" + day.Year.ToString();
+            LoginManager.MakeAPICall("schedule/MyDayCalendarStudentList/?scheduleDate=" + date + "&personaId=2", (Object o) =>
+            {
+                if (o != null)
+                {
+                    ScheduleCache = o;
+                    ScheduleCacheDate = day;
+                }
+                callback(o);
+            });
+            return (ScheduleCacheDate == day) ? ScheduleCache : null;
         }
         public Object GetAssignments(DateTime start, DateTime end, Action<Object> callback)
         {

@@ -3,39 +3,37 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-  <Button
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:text="Get Assignments"
-           android:id="@+id/assign" />
-  <TextView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/response"
-      android:text="Loading..."
-      android:fontFamily="monospace"
-      android:padding="8dp"
-      android:textAlignment="center" />
-  <Button
-      android:text="Store Trash"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/storeTrash" />
-  <Button
-      android:text="Store Trash and Delete Token"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/storeTrash2" />
-  <Button
-      android:text="Delete Token"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/deleteToken" />
-  <Button
-      android:text="Invalidate Token"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/inval" />
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Assignments"
+        android:id="@+id/assign" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/response"
+        android:text="Loading..."
+        android:fontFamily="monospace"
+        android:padding="8dp"
+        android:textAlignment="center" />
+    <Button
+        android:text="Store Trash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeTrash" />
+    <Button
+        android:text="Store Trash and Delete Token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeTrash2" />
+    <Button
+        android:text="Delete Token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteToken" />
+    <Button
+        android:text="Invalidate Token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inval" />
 </LinearLayout>

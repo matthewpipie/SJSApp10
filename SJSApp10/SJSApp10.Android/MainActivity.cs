@@ -140,9 +140,21 @@ namespace SJSApp10.Droid
         {
             switch (e.MenuItem.ItemId)
             {
-                case (Resource.Id.nav_home):
-                    // React on 'Home' selection
+                case (Resource.Id.schedule):
+                    // React on 'Schedule' selection
                     // ...
+                    break;
+                case (Resource.Id.assignmentCenter):
+                    break;
+                case (Resource.Id.usAnnouncements):
+                    break;
+                case (Resource.Id.sacSuggestions):
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(SJSManager.SAC_SUGGESTIONS_LINK));
+                    startActivity(browserIntent);
+                    break;
+                case (Resource.Id.naviance):
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NAVIANCE_LINK));
+                    startActivity(browserIntent);
                     break;
             }
 
