@@ -66,11 +66,11 @@ namespace SJSApp10
             return Path.Combine(libraryPath, path);
         }
 
-        private string token { set; get; } = null;
+        private string Token { set; get; } = null;
         public SJSLoginManager()
         {
             string path = GetPath(TOKEN_CACHE_FILE);
-            token = File.Exists(path) ? File.ReadAllText(path) : null;
+            Token = File.Exists(path) ? File.ReadAllText(path) : null;
         }
 
         public async void SubmitCredentials(string username, string password, bool clearToken, Action callback)
@@ -92,7 +92,7 @@ namespace SJSApp10
             await AccountStore.Create().SaveAsync(acct, APP_NAME);
             if (clearToken)
             {
-                token = null;
+                Token = null;
             }
             callback();
         }
@@ -157,17 +157,17 @@ namespace SJSApp10
                     string[] parsed2 = parsed1[1].Split(';');
                     string cookie = parsed2[0];
 
-                    token = cookie;
-                    File.WriteAllText(GetPath(TOKEN_CACHE_FILE), token);
+                    Token = cookie;
+                    File.WriteAllText(GetPath(TOKEN_CACHE_FILE), Token);
                     callback(true);
                 }
 
             });
         }
 
-        public async void MakeAPICall(string call, Action<Object> callback)
+        public async void MakeAPICall(string call, Action<dynamic> callback)
         {
-            if (token == null)
+            if (Token == null)
             {
                 GenerateNewToken((bool success) =>
                 {
@@ -182,17 +182,37 @@ namespace SJSApp10
                 });
                 return;
             }
-            string[] split = call.Split('?'); // 0 is url, 1 is data
-            byte[] data = Encoding.ASCII.GetBytes(split[1]);
-            WebRequest request = WebRequest.Create(BASE_URL + "api/" + split[0]);
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.Headers.Add("cookie", token);
-            request.ContentLength = data.Length;
-            using (Stream stream = request.GetRequestStream())
+            HttpWebRequest request;
+            //string call = Uri.EscapeDataString(callf);
+            /*if (method == HTTPMethod.POST)
             {
-                stream.Write(data, 0, data.Length);
+                string[] split = call.Split('?'); // 0 is url, 1 is data
+                byte[] data = Encoding.ASCII.GetBytes(split[1]);
+                request = (HttpWebRequest)WebRequest.Create(BASE_URL + "api/" + split[0]);
+                request.ContentLength = data.Length;
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                using (Stream stream = request.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
             }
+            else
+            {*/
+                request = (HttpWebRequest)WebRequest.Create(BASE_URL + "api/" + call);
+                request.Method = "GET";
+                //request.ContentType = "application/json; charset=utf-8";
+                //request.ContentLength = 0;
+                //request.Accept = "*/*";
+                //request.Host = "sjs.myschoolapp.com";
+                //request.Accept = "*/*";
+                //request.Headers.Add("Accept-Encoding", "deflate, gzip");
+                //request.AutomaticDecompression = DecompressionMethods.GZip;
+                //request.UserAgent = "test test test test";
+                //request.UseDefaultCredentials = true;
+            //}
+            request.Headers.Add("Cookie", Token);
+            
 
             string responseContent = null;
             dynamic o = null;
@@ -209,7 +229,7 @@ namespace SJSApp10
                             responseContent = sr99.ReadToEnd();
                         }
                     }
-                    o = JsonConvert.DeserializeObject(responseContent);
+                    o = JsonConvert.DeserializeObject<dynamic>(responseContent);
                     try
                     {
                         if (o.Error != null)
@@ -222,7 +242,7 @@ namespace SJSApp10
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 fail = true;
             }
@@ -254,11 +274,11 @@ namespace SJSApp10
         // TEMPORARY METHODS ONLY USED IN TESTING
         public void InvalidateToken()
         {
-            token = "1234";
+            Token = "1234";
         }
         public void DeleteToken()
         {
-            token = null;
+            Token = null;
         }
     }
 }

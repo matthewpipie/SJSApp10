@@ -46,14 +46,14 @@ namespace SJSApp10.Droid
             drawerToggle.SyncState();
 
 
-            // Get our button from the layout resource,
+            /*// Get our button from the layout resource,
             // and attach an event to it
             //Button submit = FindViewById<Button> (Resource.Id.submit);
             Button getAssignments = FindViewById<Button> (Resource.Id.assign);
 			//Button read = FindViewById<Button> (Resource.Id.read);
 			//Button write = FindViewById<Button> (Resource.Id.write);
 			
-			getAssignments.Click += delegate {
+			/*getAssignments.Click += delegate {
                 //button.Text = string.Format ("{0} clicks!", count++);
                 //string username = FindViewById<EditText>(Resource.Id.username).Text;
                 //string password = FindViewById<EditText>(Resource.Id.password).Text;
@@ -92,7 +92,6 @@ namespace SJSApp10.Droid
             {
                 //FindViewById<TextView>(Resource.Id.response2).Text = new SJSManager().read();
             };*/
-
         }
         //public void Update(TextView tv, string res)
         //{
@@ -100,7 +99,7 @@ namespace SJSApp10.Droid
         //}
         private void GetAndDisplayAssignments()
         {
-            Object cached = SJSManager.Instance.GetAssignments(DateTime.Today(), DateTime.Today(), (Object o) =>
+            Object cached = SJSManager.Instance.GetAssignments(DateTime.Today, DateTime.Today, (Object o) =>
             {
                 if (o == null)
                 {
@@ -149,12 +148,13 @@ namespace SJSApp10.Droid
                 case (Resource.Id.usAnnouncements):
                     break;
                 case (Resource.Id.sacSuggestions):
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(SJSManager.SAC_SUGGESTIONS_LINK));
-                    startActivity(browserIntent);
+                    //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(SJSManager.SAC_SUGGESTIONS_LINK));
+                    //Device.OpenUri(new Uri(SJSManager.SAC_SUGGESTIONS_LINK));
                     break;
                 case (Resource.Id.naviance):
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(NAVIANCE_LINK));
-                    startActivity(browserIntent);
+                    Intent browserIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(SJSManager.NAVIANCE_LINK));
+                    StartActivity(browserIntent);
+                    //Device.OpenUri(new Uri(SJSManager.NAVIANCE_LINK));
                     break;
             }
 
