@@ -43,7 +43,7 @@ namespace SJSApp10.Droid
         public override void OnDestroy()
         {
             base.OnDestroy();
-            ((MainActivity)Activity).OnFragmentResult();
+            ((MainFragment) ParentFragment).OnFragmentResult();
         }
 
     }

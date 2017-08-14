@@ -46,97 +46,17 @@ namespace SJSApp10.Droid
             drawerToggle.SyncState();
 
 
-            /*// Get our button from the layout resource,
-            // and attach an event to it
-            //Button submit = FindViewById<Button> (Resource.Id.submit);
-            Button getAssignments = FindViewById<Button> (Resource.Id.assign);
-			//Button read = FindViewById<Button> (Resource.Id.read);
-			//Button write = FindViewById<Button> (Resource.Id.write);
-			
-			/*getAssignments.Click += delegate {
-                //button.Text = string.Format ("{0} clicks!", count++);
-                //string username = FindViewById<EditText>(Resource.Id.username).Text;
-                //string password = FindViewById<EditText>(Resource.Id.password).Text;
-                //new SJSManager().Run(pass, FindViewById<TextView>(Resource.Id.response));
-                //new SJSManager().Run2(username, password, (string resp) => { FindViewById<TextView>(Resource.Id.response).Text = resp; });
-                //SJSManager.Instance.SetCredentials(username, password, true, () =>
-                //{
-
-                //});
-                GetAndDisplayAssignments();
-                
-                
-			};
-            FindViewById<Button>(Resource.Id.storeTrash).Click += delegate
-            {
-                SJSManager.Instance.SetCredentials("", "", false, () => { });
-            };
-            FindViewById<Button>(Resource.Id.storeTrash2).Click += delegate
-            {
-                SJSManager.Instance.SetCredentials("", "", true, () => { });
-            };
-            FindViewById<Button>(Resource.Id.deleteToken).Click += delegate
-            {
-                SJSManager.Instance.DeleteToken();
-            };
-            FindViewById<Button>(Resource.Id.inval).Click += delegate
-            {
-                SJSManager.Instance.InvalidateToken();
-            };
-            /*write.Click += delegate
-            {
-                //new SJSManager().write(FindViewById<TextView>(Resource.Id.response).Text);
-                FindViewById<TextView>(Resource.Id.response2).Text = "done written it";
-            };
-            read.Click += delegate
-            {
-                //FindViewById<TextView>(Resource.Id.response2).Text = new SJSManager().read();
-            };*/
             SJSManager.Instance.InvalidateToken();
             SJSManager.Instance.GetDayAndAnnouncement(DateTime.Today, (DayAndAnnouncement o) => { });
-        }
-        //public void Update(TextView tv, string res)
-        //{
-        //tv.Text = res;
-        //}
-        private void GetAndDisplayAssignments()
-        {
-            Object cached = SJSManager.Instance.GetAssignments(DateTime.Today, DateTime.Today, (Object o) =>
-            {
-                if (o == null)
-                {
-                    LoginFragment loginFragment = new LoginFragment();
-                    loginFragment.Show(FragmentManager, "login");
 
-                }
-                else
-                {
-                    FindViewById<TextView>(Resource.Id.response).Text = JsonConvert.SerializeObject(o);
-                }
-            });
-            FindViewById<TextView>(Resource.Id.response).Text = JsonConvert.SerializeObject(cached);
-            // temp
-            FindViewById<TextView>(Resource.Id.response).Text = "loadin";
+            MainFragment frag = new MainFragment();
+            FragmentTransaction ft = FragmentManager.BeginTransaction();
+            ft.Replace(Resource.Id.fragment_container, frag);
+            ft.AddToBackStack(null);
+            ft.Commit();
         }
-        public void OnFragmentResult()
-        {
-            GetAndDisplayAssignments();
-        }
-        /*protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-            switch (requestCode)
-            {
-                case (LOGIN_VAL):
-                    //if (resultCode == Result.Ok)
-                    //{
-                        GetAndDisplayAssignments();
-                    //}
-                    break;
-                default:
-                    break;
-            }
-        }*/
+        
+        
         void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
         {
             switch (e.MenuItem.ItemId)
