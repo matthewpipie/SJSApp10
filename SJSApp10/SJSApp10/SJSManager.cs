@@ -94,14 +94,14 @@ namespace SJSApp10
                         ret.schoolDay = DayToInt((string)o[2]["DayLabel"]);
                         ret.announcement = o[2]["Announcement"];
                     }
-                    catch (Exception)
+                    catch
                     {
                         try
                         {
                             ret.schoolDay = DayToInt((string)o[1]["DayLabel"]);
                             ret.announcement = o[1]["Announcement"];
                         }
-                        catch (Exception) {
+                        catch {
                             //ret.schoolDay = null;
                             //ret.announcement = null;
                         }

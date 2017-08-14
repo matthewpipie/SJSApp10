@@ -22,33 +22,40 @@ namespace SJSApp10
             string token = "token placeholder thingo";
 
             WebRequest request = WebRequest.Create(urlAddress);
-            WebResponse response = await request.GetResponseAsync();
+            try
+            {
+                WebResponse response = await request.GetResponseAsync();
 
-            //if (response.StatusCode == HttpStatusCode.OK)
-            //{
-            Stream receiveStream = response.GetResponseStream();
-            StreamReader readStream = null;
+                //if (response.StatusCode == HttpStatusCode.OK)
+                //{
+                Stream receiveStream = response.GetResponseStream();
+                StreamReader readStream = null;
 
-            //if (response. == null)
-            //{
-            readStream = new StreamReader(receiveStream);
-            //}
-            //else
-            //{
-            //readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-            //}
+                //if (response. == null)
+                //{
+                readStream = new StreamReader(receiveStream);
+                //}
+                //else
+                //{
+                //readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
+                //}
 
-            string data = readStream.ReadToEnd();
+                string data = readStream.ReadToEnd();
 
-            string[] datas = data.Split('"');
-            int index = Array.IndexOf(datas, "__RequestVerificationToken");
+                string[] datas = data.Split('"');
+                int index = Array.IndexOf(datas, "__RequestVerificationToken");
 
-            token = datas[index + 4];
+                token = datas[index + 4];
 
-            response.Close();
-            readStream.Close();
-            //}
-            action(token);
+                response.Close();
+                readStream.Close();
+                //}
+                action(token);
+            }
+            catch
+            {
+
+            }
 
         }
 
@@ -237,12 +244,12 @@ namespace SJSApp10
                             fail = true;
                         }
                     }
-                    catch (Exception e)
+                    catch
                     {
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
                 fail = true;
             }

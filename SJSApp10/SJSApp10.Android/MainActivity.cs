@@ -92,6 +92,8 @@ namespace SJSApp10.Droid
             {
                 //FindViewById<TextView>(Resource.Id.response2).Text = new SJSManager().read();
             };*/
+            SJSManager.Instance.InvalidateToken();
+            SJSManager.Instance.GetDayAndAnnouncement(DateTime.Today, (DayAndAnnouncement o) => { });
         }
         //public void Update(TextView tv, string res)
         //{
