@@ -6,7 +6,6 @@ namespace SJSApp10.iOS
 {
 	public partial class ViewController : UIViewController
 	{
-		int count = 1;
 
 		public ViewController (IntPtr handle) : base (handle)
 		{
@@ -16,11 +15,7 @@ namespace SJSApp10.iOS
 		{
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
-			Button.AccessibilityIdentifier = "myButton";
-			Button.TouchUpInside += delegate {
-				var title = string.Format ("{0} clicks!", count++);
-				Button.SetTitle (title, UIControlState.Normal);
-			};
+            //GetAssignmentButton.
 		}
 
 		public override void DidReceiveMemoryWarning ()

@@ -15,6 +15,9 @@ namespace SJSApp10
         public static readonly string TOKEN_CACHE_FILE = "SJSAppToken.dat";
         public static readonly string APP_NAME = "SJS App";
 
+        private static string _iosUser;
+        private static string _iosPass;
+
         private async void GetAntiAjaxToken(Action<string> action)
         {
 
@@ -82,6 +85,7 @@ namespace SJSApp10
 
         public async void SubmitCredentials(string username, string password, bool clearToken, Action callback)
         {
+#if __ANDROID__
             // Delete previous credentials
             var account = AccountStore.Create().FindAccountsForService(APP_NAME).FirstOrDefault();
             while (account != null)
@@ -101,11 +105,16 @@ namespace SJSApp10
             {
                 Token = null;
             }
+#else
+            _iosUser = username;
+            _iosPass = password;
+#endif
             callback();
         }
 
         public static string[] GetCredentials()
         {
+#if __ANDROID__
             var acct = AccountStore.Create().FindAccountsForService(APP_NAME).FirstOrDefault();
             if (acct == null)
             {
@@ -113,6 +122,9 @@ namespace SJSApp10
             }
 
             return new string[] { acct.Username, acct.Properties["Password"] };
+#else
+            return new string[] { _iosUser, _iosPass };
+#endif
         }
 
         private void GenerateNewToken(Action<bool> callback)
