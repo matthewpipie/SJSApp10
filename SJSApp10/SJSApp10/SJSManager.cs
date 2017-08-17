@@ -16,9 +16,9 @@ namespace SJSApp10
         // Private vars
         private SJSLoginManager LoginManager;
 
-        private Object AssignmentCache { get; set; }
+        private Newtonsoft.Json.Linq.JArray AssignmentCache { get; set; }
         
-        private Object ScheduleCache { get; set; }
+        private Newtonsoft.Json.Linq.JArray ScheduleCache { get; set; }
         private DateTime ScheduleCacheDate { get; set; }
 
         private DayAndAnnouncement DayAndAnnouncementCache { get; set; }
@@ -47,10 +47,10 @@ namespace SJSApp10
         {
             LoginManager.SubmitCredentials(username, password, clearToken, callback);
         }
-        public dynamic GetSchedule(DateTime day, Action<dynamic> callback)
+        public Newtonsoft.Json.Linq.JArray GetSchedule(DateTime day, Action<Newtonsoft.Json.Linq.JArray> callback)
         {
             string date = day.Month.ToString() + "%2F" + day.Day.ToString() + "%2F" + day.Year.ToString();
-            LoginManager.MakeAPICall("schedule/MyDayCalendarStudentList/?scheduleDate=" + date + "&personaId=2", (dynamic o) =>
+            LoginManager.MakeAPICall("schedule/MyDayCalendarStudentList/?scheduleDate=" + date + "&personaId=2", (Newtonsoft.Json.Linq.JArray o) =>
             {
                 if (o != null)
                 {
@@ -61,13 +61,13 @@ namespace SJSApp10
             });
             return (ScheduleCacheDate == day) ? ScheduleCache : null;
         }
-        public dynamic GetAssignments(DateTime start, DateTime end, Action<dynamic> callback)
+        public Newtonsoft.Json.Linq.JArray GetAssignments(DateTime start, DateTime end, Action<Newtonsoft.Json.Linq.JArray> callback)
         {
             // %2F is the HTML encoding for a slash (/) which for some really weird reason myschoolapp uses
             // They also use M-D-YYYY which is just really strange and not standard at all
             string startDate = start.Month.ToString() + "%2F" + start.Day.ToString() + "%2F" + start.Year.ToString();
             string endDate = end.Month.ToString() + "%2F" + end.Day.ToString() + "%2F" + end.Year.ToString();
-            LoginManager.MakeAPICall("DataDirect/AssignmentCenterAssignments/?format=json&filter=2&dateStart=" + startDate + "&dateEnd=" + endDate + "&persona=2&statusList=&sectionList=", (dynamic o) => 
+            LoginManager.MakeAPICall("DataDirect/AssignmentCenterAssignments/?format=json&filter=2&dateStart=" + startDate + "&dateEnd=" + endDate + "&persona=2&statusList=&sectionList=", (Newtonsoft.Json.Linq.JArray o) => 
             {
                 if (o != null)
                 {
@@ -84,7 +84,7 @@ namespace SJSApp10
         public DayAndAnnouncement GetDayAndAnnouncement(DateTime day, Action<DayAndAnnouncement> callback)
         {
             string date = day.Month.ToString() + "%2F" + day.Day.ToString() + "%2F" + day.Year.ToString();
-            LoginManager.MakeAPICall("schedule/ScheduleCurrentDayAnnouncmentParentStudent/?mydayDate=" + date + "&viewerId=1773520&viewerPersonaId=2", (dynamic o) =>
+            LoginManager.MakeAPICall("schedule/ScheduleCurrentDayAnnouncmentParentStudent/?mydayDate=" + date + "&viewerId=1773520&viewerPersonaId=2", (Newtonsoft.Json.Linq.JArray o) =>
             {
                 DayAndAnnouncement ret = new DayAndAnnouncement();
                 if (o != null)
@@ -92,14 +92,14 @@ namespace SJSApp10
                     try
                     {
                         ret.schoolDay = DayToInt((string)o[2]["DayLabel"]);
-                        ret.announcement = o[2]["Announcement"];
+                        ret.announcement = o[2]["Announcement"].ToString();
                     }
                     catch
                     {
                         try
                         {
                             ret.schoolDay = DayToInt((string)o[1]["DayLabel"]);
-                            ret.announcement = o[1]["Announcement"];
+                            ret.announcement = o[1]["Announcement"].ToString();
                         }
                         catch {
                             //ret.schoolDay = null;

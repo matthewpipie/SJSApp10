@@ -11,19 +11,11 @@ using UIKit;
 
 namespace SJSApp10.iOS
 {
-    [Register ("ScheduleViewController")]
-    partial class ScheduleViewController
+    [Register ("ScheduleTableView")]
+    partial class ScheduleTableView
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        SJSApp10.iOS.ScheduleTableView ScheduleTableView { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (ScheduleTableView != null) {
-                ScheduleTableView.Dispose ();
-                ScheduleTableView = null;
-            }
         }
     }
 }

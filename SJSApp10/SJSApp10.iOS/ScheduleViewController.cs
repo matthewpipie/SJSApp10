@@ -15,21 +15,18 @@ namespace SJSApp10.iOS
         {
             base.ViewDidLoad();
 
-            GetAssignmentsButton.TouchUpInside += (object sender, EventArgs e) =>
-            {
-                GetAndDisplayAssignments();
-            };
+            GetAndDisplaySchedule();
         }
-        private void GetAndDisplayAssignments()
+        private void GetAndDisplaySchedule()
         {
-            Object cached = SJSManager.Instance.GetAssignments(DateTime.Today, DateTime.Today, (Object o) =>
+            Newtonsoft.Json.Linq.JArray cached = SJSManager.Instance.GetSchedule(new DateTime(2017, 8, 23), (Newtonsoft.Json.Linq.JArray o) =>
             {
                 if (o == null)
                 {
                     LoginViewController loginView = this.Storyboard.InstantiateViewController("LoginViewController") as LoginViewController;
                     if (loginView != null)
                     {
-                        loginView.ret = () => { GetAndDisplayAssignments(); };
+                        loginView.ret = () => { GetAndDisplaySchedule(); };
                         //this.NavigationController.PushViewController(loginView, true);
                         this.PresentViewController(loginView, true, () => { });
                     }
@@ -37,12 +34,33 @@ namespace SJSApp10.iOS
                 }
                 else
                 {
-                    ResultLabel.Text = JsonConvert.SerializeObject(o);
+                    DisplaySchedule(o);
                 }
             });
-            ResultLabel.Text = JsonConvert.SerializeObject(cached);
+            DisplaySchedule(cached);
             // temp
-            ResultLabel.Text = "loadin";
+            //ResultLabel.Text = "loadin";
+        }
+        private void DisplaySchedule(Newtonsoft.Json.Linq.JArray o)
+        {
+            ScheduleTableView.entries.Clear();
+            try
+            {
+                foreach (var schoolClass in o.Children() )
+                {
+                    //var itemProperties = schoolClass.Children<Newtonsoft.Json.Linq.JProperty>();
+                    string title = schoolClass["CourseTitle"].ToString();
+                    string startTime = schoolClass["MyDayStartTime"].ToString();
+                    string endTime = schoolClass["MyDayEndTime"].ToString();
+                    string room = schoolClass["RoomNumber"].ToString();
+                    ScheduleTableView.entries.Add(startTime + " - " + endTime + " " + title + " (" + room + ")");
+                }
+                ScheduleTableView.ReloadData();
+            }
+            catch (Exception e)
+            {
+
+            }
         }
     }
 }

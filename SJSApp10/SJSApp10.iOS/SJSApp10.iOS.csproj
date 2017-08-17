@@ -164,6 +164,10 @@
     </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="ScheduleTableView.cs" />
+    <Compile Include="ScheduleTableView.designer.cs">
+      <DependentUpon>ScheduleTableView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScheduleViewController.cs" />
     <Compile Include="ScheduleViewController.designer.cs">
       <DependentUpon>ScheduleViewController.cs</DependentUpon>

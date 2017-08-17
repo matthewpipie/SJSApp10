@@ -184,7 +184,7 @@ namespace SJSApp10
             });
         }
 
-        public async void MakeAPICall(string call, Action<dynamic> callback)
+        public async void MakeAPICall(string call, Action<Newtonsoft.Json.Linq.JArray> callback)
         {
             if (Token == null)
             {
@@ -234,7 +234,7 @@ namespace SJSApp10
             
 
             string responseContent = null;
-            dynamic o = null;
+            Newtonsoft.Json.Linq.JArray o = null;
 
             bool fail = false;
             try
@@ -251,7 +251,7 @@ namespace SJSApp10
                     o = JsonConvert.DeserializeObject<dynamic>(responseContent);
                     try
                     {
-                        if (o.Error != null)
+                        if (o["Error"] != null)
                         {
                             fail = true;
                         }
