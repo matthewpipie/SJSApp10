@@ -16,13 +16,13 @@ namespace SJSApp10.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        SJSApp10.iOS.ScheduleTableView ScheduleTableView { get; set; }
+        SJSApp10.iOS.ScheduleTableView scheduleTableView { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (ScheduleTableView != null) {
-                ScheduleTableView.Dispose ();
-                ScheduleTableView = null;
+            if (scheduleTableView != null) {
+                scheduleTableView.Dispose ();
+                scheduleTableView = null;
             }
         }
     }

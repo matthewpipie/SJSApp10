@@ -43,7 +43,8 @@ namespace SJSApp10.iOS
         }
         private void DisplaySchedule(Newtonsoft.Json.Linq.JArray o)
         {
-            ScheduleTableView.entries.Clear();
+            scheduleTableView.LeftEntries.Clear();
+            scheduleTableView.RightEntries.Clear();
             try
             {
                 foreach (var schoolClass in o.Children() )
@@ -53,9 +54,11 @@ namespace SJSApp10.iOS
                     string startTime = schoolClass["MyDayStartTime"].ToString();
                     string endTime = schoolClass["MyDayEndTime"].ToString();
                     string room = schoolClass["RoomNumber"].ToString();
-                    ScheduleTableView.entries.Add(startTime + " - " + endTime + " " + title + " (" + room + ")");
+                    //ScheduleTableView.entries.Add(startTime + " - " + endTime + " " + title + " (" + room + ")");
+                    scheduleTableView.LeftEntries.Add(startTime + " - " + endTime);
+                    scheduleTableView.RightEntries.Add(title + (String.IsNullOrEmpty(room) ? "" : " (" + room + ")"));
                 }
-                ScheduleTableView.ReloadData();
+                scheduleTableView.ReloadData();
             }
             catch (Exception e)
             {
